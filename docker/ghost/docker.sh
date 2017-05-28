@@ -41,7 +41,7 @@ elif [[ "$1" == "config" ]]; then
     docker-machine scp ghost/config.js $MACHINE_NAME:/opt/ghost/config.js
 elif [[ "$1" == "deploy" ]]; then
     # Build && start ghost service
-    bash docker.local.sh config
+    bash docker.sh config
     utils.printer "Build && start services"
     docker-compose $(docker-machine config $MACHINE_NAME) up -d ghost
     docker-compose $(docker-machine config $MACHINE_NAME) restart ghost
