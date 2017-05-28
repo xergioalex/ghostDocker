@@ -17,7 +17,7 @@ services:
       - /opt/nginx/logs:/etc/nginx/logs
       - /opt/letsencrypt/certbot:/etc/letsencrypt
     links:
-      - meteor
+      - ghost
     ports:
       - "80:80"
       - "443:443"

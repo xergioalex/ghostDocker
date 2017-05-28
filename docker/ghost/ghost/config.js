@@ -11,8 +11,17 @@ config = {
     // When running Ghost in the wild, use the production environment.
     // Configure your URL and mail settings here
     production: {
-        url: 'http://my-ghost-blog.com',
-        mail: {},
+        url: 'http://localhost:2368',
+        mail: {
+            transport: 'SMTP',
+            options: {
+                service: 'Sendgrid',
+                auth: {
+                    user: 'apikey', // mailgun username
+                    pass: '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'  // mailgun password
+                }
+            }
+        },
         database: {
             client: 'sqlite3',
             connection: {
@@ -24,6 +33,9 @@ config = {
         server: {
             host: '0.0.0.0',
             port: '2368'
+        },
+        paths: {
+            contentPath: path.join(process.env.GHOST_CONTENT, '/')
         }
     },
 
