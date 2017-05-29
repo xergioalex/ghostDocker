@@ -60,7 +60,7 @@ elif [[ "$1" == "server.config" ]]; then
 elif [[ "$1" == "server.start" ]]; then
     utils.printer "Starting nginx machine..."
     docker-compose up -d nginx
-    docker-compose retart nginx
+    docker-compose restart nginx
 elif [[ "$1" == "server.up" ]]; then
     # Set initial configuration in server for nginx
     bash docker.sh server.config
