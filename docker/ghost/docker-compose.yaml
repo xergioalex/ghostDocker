@@ -8,6 +8,8 @@ services:
       - ${SERVICE_GHOST_PORT}
     environment:
       - NODE_ENV=production
+    env_file:
+      - ghost/.env
     restart: on-failure
 
   nginx:
@@ -21,6 +23,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    env_file:
+      - nginx/.env
     restart: on-failure
 
   certbot:
