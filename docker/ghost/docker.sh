@@ -2,7 +2,7 @@
 . utils.sh
 
 # Create envs vars if don't exist
-ENV_FILES=(".env" "nginx/site.template" "nginx/site.template.ssl" "ghost/config.js")
+ENV_FILES=(".env" "nginx/site.template" "nginx/site.template.ssl" "nginx/.env" "nginx/nginx.conf" "ghost/config.js" "ghost/.env")
 utils.check_envs_files "${ENV_FILES[@]}"
 
 # Load environment vars, to use from console, run follow command: 
@@ -117,6 +117,8 @@ elif [[ "$1" == "machine.rm" ]]; then
 elif [[ "$1" == "server.config" ]]; then
     utils.printer "Set nginx configuration..."
     docker-machine ssh $MACHINE_NAME mkdir -p /opt/nginx/config/
+    docker-machine ssh $MACHINE_NAME mkdir -p /opt/nginx/main/
+    docker-machine scp nginx/nginx.conf $MACHINE_NAME:/opt/nginx/main/nginx.conf
     if [[ "$2" == "secure" ]]; then
         docker-machine scp nginx/site.template.ssl $MACHINE_NAME:/opt/nginx/config/default.conf
     else

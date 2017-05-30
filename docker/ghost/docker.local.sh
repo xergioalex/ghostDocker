@@ -2,7 +2,7 @@
 . utils.sh
 
 # Create envs vars if don't exist
-ENV_FILES=(".env" "nginx/site.template" "nginx/site.template.ssl" "nginx/.env" "ghost/config.js" "ghost/.env")
+ENV_FILES=(".env" "nginx/site.template" "nginx/site.template.ssl" "nginx/.env" "nginx/nginx.conf" "ghost/config.js" "ghost/.env")
 utils.check_envs_files "${ENV_FILES[@]}"
 
 # Load environment vars, to use from console, run follow command: 
@@ -53,6 +53,8 @@ elif [[ "$1" == "server.config" ]]; then
     utils.printer "Set nginx configuration..."
     mkdir -p /opt/nginx/config/
     cp nginx/site.template /opt/nginx/config/default.conf
+    mkdir -p /opt/nginx/main/
+    cp nginx/nginx.conf /opt/nginx/main/nginx.conf
     utils.printer "Creating logs files..."
     mkdir -p /opt/nginx/logs/
     touch /opt/nginx/logs/site.access
@@ -63,14 +65,14 @@ elif [[ "$1" == "server.start" ]]; then
     docker-compose restart nginx
 elif [[ "$1" == "server.up" ]]; then
     # Set initial configuration in server for nginx
-    bash docker.sh server.config
+    bash docker.local.sh server.config
     # Deploying services to remote machine server
-    bash docker.sh server.start
+    bash docker.local.sh server.start
 elif [[ "$1" == "up" ]]; then
     # Build && start ghost service
-    bash docker.sh deploy
+    bash docker.local.sh deploy
     # Set server configuration
-    bash docker.sh server.up
+    bash docker.local.sh server.up
 else
     utils.printer "Usage: docker.sh [build|up|start|restart|stop|mongo|bash|logs n_last_lines|rm|ps]"
     echo -e "up --> Build && restart ghost service"

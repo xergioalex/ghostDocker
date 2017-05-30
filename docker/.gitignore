@@ -1,4 +1,7 @@
+ghost/ghost/.env
 ghost/ghost/config.js
 ghost/.env
+ghost/nginx/.env
+ghost/nginx/nginx.conf
 ghost/nginx/site.template
 ghost/nginx/site.template.ssl

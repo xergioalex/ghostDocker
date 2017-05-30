@@ -15,6 +15,7 @@ services:
   nginx:
     image: nginx
     volumes:
+      - /opt/nginx/main:/etc/nginx/main
       - /opt/nginx/config:/etc/nginx/conf.d
       - /opt/nginx/logs:/etc/nginx/logs
       - /opt/letsencrypt/certbot:/etc/letsencrypt
@@ -25,6 +26,7 @@ services:
       - "443:443"
     env_file:
       - nginx/.env
+    command: sh -c "cp /etc/nginx/main/nginx.conf /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
     restart: on-failure
 
   certbot:
