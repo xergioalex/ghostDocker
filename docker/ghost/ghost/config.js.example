@@ -17,8 +17,8 @@ config = {
             options: {
                 service: 'Sendgrid',
                 auth: {
-                    user: 'apikey', // mailgun username
-                    pass: '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'  // mailgun password
+                    user: '', // mailgun username
+                    pass: ''  // mailgun password
                 }
             }
         },
