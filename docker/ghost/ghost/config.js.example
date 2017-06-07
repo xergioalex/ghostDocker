@@ -17,8 +17,8 @@ config = {
             options: {
                 service: 'Sendgrid',
                 auth: {
-                    user: '', // mailgun username
-                    pass: ''  // mailgun password
+                    user: '', // sendgrid username
+                    pass: ''  // sendgrid password
                 }
             }
         },
@@ -56,10 +56,10 @@ config = {
         //  mail: {
         //      transport: 'SMTP',
         //      options: {
-        //          service: 'Mailgun',
+        //          service: 'Sendgrid',
         //          auth: {
-        //              user: '', // mailgun username
-        //              pass: ''  // mailgun password
+        //              user: '', // sendgrid username
+        //              pass: ''  // sendgrid password
         //          }
         //      }
         //  },
