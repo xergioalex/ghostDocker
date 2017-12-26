@@ -10,7 +10,10 @@ Download && install **docker**
 - [For Linux](https://docs.docker.com/engine/getstarted/step_one/#docker-for-linux)
 
 Download && install **docker-compose**
-- [Instrucciones](https://docs.docker.com/compose/install/)
+- [Instructions](https://docs.docker.com/compose/install/)
+
+Download && install **docker-machine**
+- [Instructions](https://docs.docker.com/machine/install-machine/)
 
 #### Happy path
 
