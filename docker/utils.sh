@@ -8,7 +8,7 @@ function utils.printer {
     	echo ""
     fi
     echo -e "${GREEN}$1${RESET}"
-}  
+}
 
 
 # Create enviroment files if don't exists
@@ -29,9 +29,4 @@ function utils.load_environment {
 		source .env
 		set +a
 	fi
-}
-
-# Load environment vars in root directory
-function utils.current_folder_name {
-	echo $(pwd | grep -o '[^/]*$') | tr "[:upper:]" "[:lower:]"
 }

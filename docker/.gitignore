@@ -1,7 +1,8 @@
-ghost/ghost/.env
-ghost/ghost/config.js
-ghost/.env
-ghost/nginx/.env
-ghost/nginx/nginx.conf
-ghost/nginx/site.template
-ghost/nginx/site.template.ssl
+production/.env
+production/ghost/.env
+production/mysql/.env
+production/nginx/.env
+production/nginx/nginx.conf
+production/nginx/default.conf
+production/nginx/site.template
+production/nginx/site.template.ssl
