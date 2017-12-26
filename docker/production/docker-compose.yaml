@@ -28,7 +28,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - letsencrypt_certbot:/etc/letsencrypt
-      - nginx_logs:/etc/nginx/logs/
+      - nginx_logs:/etc/nginx/logs
     links:
       - ghost
     ports:
