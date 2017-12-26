@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Printer with shell colors
 function utils.printer {
 	# BASH COLORS
