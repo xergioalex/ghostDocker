@@ -1,10 +1,12 @@
 #!/bin/bash
+SCRIPT=`realpath -s $0`
+SCRIPTPATH=`dirname $SCRIPT`
 
 # Utils functions
-. ../utils.sh
+. $SCRIPTPATH/../utils.sh
 
 # Create envs vars if don't exist
-ENV_FILES=(".env" "nginx/site.template" "nginx/site.template.ssl" "nginx/.env" "nginx/nginx.conf" "ghost/.env" "mysql/.env")
+ENV_FILES=(".env" "nginx/site.template" "nginx/site.template.ssl" "nginx/.env" "nginx/nginx.conf" "nginx/renewssl.sh" "ghost/.env" "mysql/.env")
 utils.check_envs_files "${ENV_FILES[@]}"
 
 # Load environment vars, to use from console, run follow command:
@@ -18,12 +20,20 @@ if [[ "$1" == "deploy" ]]; then
     docker-compose restart ghost
 elif [[ "$1" == "server.up" ]]; then
     if [[ "$2" == "secure" ]]; then
+        utils.printer "Set nginx service renewssl vars..."
+        sed -i /NGINX_SERVICE_CONTAINER=/c\NGINX_SERVICE_CONTAINER=${COMPOSE_PROJECT_NAME}_nginx_1 nginx/renewssl.sh
+        sed -i /CERTBOT_SERVICE_CONTAINER=/c\CERTBOT_SERVICE_CONTAINER=${COMPOSE_PROJECT_NAME}_certbot_1 nginx/renewssl.sh
         utils.printer "Settting default.conf based on site.template.ssl..."
         cp nginx/site.template.ssl nginx/default.conf
         utils.printer "Stopping nginx machine if it's running..."
         docker-compose stop nginx
         utils.printer "Creating letsencrypt certifications files..."
         docker-compose up certbot
+        utils.printer "Setting up cron job for auto renew ssl..."
+        CRONPATH=/opt/crons/${COMPOSE_PROJECT_NAME}
+        mkdir -p $CRONPATH
+        cp nginx/renewssl.sh $CRONPATH/renewssl.sh
+        touch $CRONPATH/renewssl.logs
     else
         utils.printer "Settting default.conf based on site.template..."
         cp nginx/site.template nginx/default.conf
