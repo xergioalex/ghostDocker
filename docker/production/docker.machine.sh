@@ -6,7 +6,7 @@ SCRIPTPATH=`dirname $SCRIPT`
 . $SCRIPTPATH/../utils.sh
 
 # Create envs vars if don't exist
-ENV_FILES=(".env" "nginx/site.template" "nginx/site.template.ssl" "nginx/.env" "nginx/nginx.conf" "nginx/renewssl.sh" "ghost/.env" "mysql/.env")
+ENV_FILES=(".env" "nginx/site.template" "nginx/site.template.ssl" "nginx/.env" "nginx/nginx.conf" "nginx/renewssl.sh" "nginx/crontab" "ghost/.env" "mysql/.env")
 utils.check_envs_files "${ENV_FILES[@]}"
 
 # Load environment vars, to use from console, run follow command:
