@@ -7,7 +7,7 @@ function utils.printer {
     # BASH COLORS
     GREEN=`tput setaf 2`
     RESET=`tput sgr0`
-    echo -e "${GREEN}$1${RESET}"
+    echo -e "${GREEN}$(date +"%b %d %r") - $1${RESET}"
 }
 
 # Check container status and PORT status
