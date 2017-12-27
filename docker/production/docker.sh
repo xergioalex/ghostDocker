@@ -49,6 +49,12 @@ elif [[ "$1" == "up" ]]; then
     bash docker.sh deploy
     # Set server configuration
     bash docker.sh server.up $2
+elif [[ "$1" == "start" ]]; then
+    utils.printer "Start services"
+    docker-compose start $2
+elif [[ "$1" == "restart" ]]; then
+    utils.printer "Restart services"
+    docker-compose restart $2
 elif [[ "$1" == "stop" ]]; then
     utils.printer "Stop services"
     docker-compose stop $2
