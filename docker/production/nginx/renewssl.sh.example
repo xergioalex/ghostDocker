@@ -27,6 +27,10 @@ function utils.checkContainerPortStatus {
 NGINX_SERVICE_CONTAINER=
 CERTBOT_SERVICE_CONTAINER=
 
+utils.printer "-------------------------------------------------------------------------------"
+utils.printer "Renew Certificate Job"
+utils.printer "-------------------------------------------------------------------------------"
+
 utils.printer "Step 0: Check configuration vars"
 if [[ ! -z $NGINX_SERVICE_CONTAINER ]] && [[ ! -z $CERTBOT_SERVICE_CONTAINER ]]; then
     utils.printer "Step 1: Stop nginx service"
