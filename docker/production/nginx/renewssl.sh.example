@@ -25,18 +25,18 @@ function utils.checkContainerPortStatus {
 
 # Docker container service names
 NGINX_SERVICE_CONTAINER=
-CERBOT_SERVICE_CONTAINER=
+CERTBOT_SERVICE_CONTAINER=
 
 utils.printer "Step 0: Check configuration vars"
-if [[ ! -z $NGINX_SERVICE_CONTAINER ]] && [[ ! -z $CERBOT_SERVICE_CONTAINER ]]; then
+if [[ ! -z $NGINX_SERVICE_CONTAINER ]] && [[ ! -z $CERTBOT_SERVICE_CONTAINER ]]; then
     utils.printer "Step 1: Stop nginx service"
     docker stop $NGINX_SERVICE_CONTAINER
     utils.checkContainerPortStatus $NGINX_SERVICE_CONTAINER 80
 
     utils.printer "Step 2: Create or renew certificates"
     utils.printer "Start cerbot service"
-    docker restart $CERBOT_SERVICE_CONTAINER
-    utils.checkContainerPortStatus $CERBOT_SERVICE_CONTAINER 80
+    docker restart $CERTBOT_SERVICE_CONTAINER
+    utils.checkContainerPortStatus $CERTBOT_SERVICE_CONTAINER 80
 
     utils.printer "Step 3: Restart nginx service"
     docker restart $NGINX_SERVICE_CONTAINER

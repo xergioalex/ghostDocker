@@ -32,8 +32,10 @@ elif [[ "$1" == "server.up" ]]; then
         CRONPATH=/opt/crons/${COMPOSE_PROJECT_NAME}
         mkdir -p $CRONPATH
         cp nginx/renewssl.sh $CRONPATH/renewssl.sh
-        cp nginx/crontab $CRONPATH/crontab
+        chmod +x $CRONPATH/renewssl.sh
         touch $CRONPATH/renewssl.logs
+        cp nginx/crontab $CRONPATH/crontab
+        crontab $CRONPATH/crontab
     else
         utils.printer "Settting default.conf based on site.template..."
         cp nginx/site.template nginx/default.conf
