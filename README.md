@@ -9,6 +9,8 @@
 
 # Ghost docker configuration using nginx and certbot for ssl #
 
+[![Docker infrastructure](docker-infrastructure.png)]()
+
 ## Docker
 
 #### Prerequisitos
