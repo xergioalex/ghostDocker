@@ -1,4 +1,5 @@
 [![Demo online](https://img.shields.io/badge/live%20demo-online-brightgreen.svg)](https://blog.xergioalex.com/)
+[![Ghost version](https://img.shields.io/badge/ghost%20release-%3E%3D%201.0.0-blue.svg)](https://github.com/TryGhost/Ghost)
 [![GitHub issues](https://img.shields.io/github/issues/xergioalex/ghostDocker.svg)](https://github.com/xergioalex/ghostDocker/issues)
 [![GitHub forks](https://img.shields.io/github/forks/xergioalex/ghostDocker.svg)](https://github.com/xergioalex/ghostDocker/network)
 [![GitHub stars](https://img.shields.io/github/stars/xergioalex/ghostDocker.svg?style=social&label=Star)](https://github.com/xergioalex/ghostDocker/)
