@@ -111,14 +111,14 @@ elif [[ "$1" == "bash" ]]; then
         utils.printer "Connect to $2 bash shell"
         docker-compose $(docker-machine config $MACHINE_NAME) exec $2 bash
     else
-        utils.printer "You should specify the service name"
+        utils.printer "You should specify the service name: ghost | mysql | nginx | cerbot"
     fi
 elif [[ "$1" == "sh" ]]; then
     if [[ ! -z "$2" ]]; then
         utils.printer "Connect to $2 bash shell"
         docker-compose $(docker-machine config $MACHINE_NAME) exec $2 sh
     else
-        utils.printer "You should specify the service name"
+        utils.printer "You should specify the service name: ghost | mysql | nginx | cerbot"
     fi
 elif [[ "$1" == "logs" ]]; then
     if [[ ! -z "$2" ]]; then
@@ -129,7 +129,7 @@ elif [[ "$1" == "logs" ]]; then
             docker-compose $(docker-machine config $MACHINE_NAME) logs -f --tail=$3 $2
         fi
     else
-        utils.printer "You should specify the service name"
+        utils.printer "You should specify the service name: ghost | mysql | nginx | cerbot"
     fi
 elif [[ "$1" == "ps" ]]; then
     utils.printer "Show all running containers"
