@@ -41,5 +41,6 @@ function utils.nginx_renewssl_vars {
     sed -i /CERTBOT_SERVICE_CONTAINER=/c\CERTBOT_SERVICE_CONTAINER=${COMPOSE_PROJECT_NAME}_certbot_1 nginx/renewssl.sh
 
     # Setup cron job vars
+    cp nginx/crontab.example nginx/crontab
     sed -i -e "s/COMPOSE_PROJECT_NAME/$COMPOSE_PROJECT_NAME/g" nginx/crontab
 }

@@ -12,8 +12,6 @@ utils.check_envs_files "${ENV_FILES[@]}"
 # Load environment vars, to use from console, run follow command:
 utils.load_environment
 
-utils.nginx_renewssl_vars
-
 # Menu options
 if [[ "$1" == "deploy" ]]; then
     # Build && start services
