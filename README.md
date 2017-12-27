@@ -7,7 +7,7 @@
 [![Twitter XergioAleX](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/xergioalex)
 
 
-# Ghost docker configuration using nginx and certbot for ssl #
+# Ghost docker configuration using nginx and certbot #
 
 [![Docker infrastructure](docker-infrastructure.png)]()
 
