@@ -62,12 +62,22 @@ elif [[ "$1" == "deploy" ]]; then
     docker-compose $(docker-machine config $MACHINE_NAME) restart ghost
 elif [[ "$1" == "server.up" ]]; then
     if [[ "$2" == "secure" ]]; then
+        utils.printer "Set nginx service renewssl vars..."
+        utils.nginx_renewssl_vars
         utils.printer "Settting default.conf based on site.template.ssl..."
         cp nginx/site.template.ssl nginx/default.conf
         utils.printer "Stopping nginx machine if it's running..."
         docker-compose $(docker-machine config $MACHINE_NAME) stop nginx
         utils.printer "Creating letsencrypt certifications files..."
         docker-compose $(docker-machine config $MACHINE_NAME) up certbot
+        utils.printer "Setting up cron job for auto renew ssl..."
+        CRONPATH=/opt/crons/${COMPOSE_PROJECT_NAME}
+        docker-machine ssh $MACHINE_NAME sudo mkdir -p $CRONPATH
+        docker-machine scp nginx/renewssl.sh $MACHINE_NAME:$CRONPATH/renewssl.sh
+        docker-machine ssh $MACHINE_NAME sudo chmod +x $CRONPATH/renewssl.sh
+        docker-machine ssh $MACHINE_NAME sudo touch $CRONPATH/renewssl.logs
+        docker-machine scp nginx/crontab $MACHINE_NAME:$CRONPATH/crontab
+        docker-machine ssh $MACHINE_NAME sudo crontab $CRONPATH/crontab
     else
         utils.printer "Settting default.conf based on site.template..."
         cp nginx/site.template nginx/default.conf
