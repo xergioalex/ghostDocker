@@ -1,4 +1,14 @@
-# Ghost with Docker Configuration #
+[![Demo online](https://img.shields.io/badge/live%20demo-online-brightgreen.svg)](https://blog.xergioalex.com/)
+[![Release shield](https://img.shields.io/github/release/xergioalex/ghostDocker.svg)](https://github.com/xergioalex/ghostDocker/releases)
+[![Ghost version](https://img.shields.io/badge/ghost%20release-%3E%3D%201.0.0-blue.svg)](https://github.com/TryGhost/Ghost)
+[![GitHub issues](https://img.shields.io/github/issues/xergioalex/ghostDocker.svg)](https://github.com/xergioalex/ghostDocker/issues)
+[![GitHub forks](https://img.shields.io/github/forks/xergioalex/ghostDocker.svg)](https://github.com/xergioalex/ghostDocker/network)
+[![GitHub stars](https://img.shields.io/github/stars/xergioalex/ghostDocker.svg?style=social&label=Star)](https://github.com/xergioalex/ghostDocker/)
+[![GitHub followers](https://img.shields.io/github/followers/xergioalex.svg?style=social&label=Follow)]()
+[![Twitter XergioAleX](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/xergioalex)
+
+
+# Ghost docker configuration using nginx and certbot for ssl #
 
 ## Docker
 
@@ -15,51 +25,72 @@ Download && install **docker-compose**
 Download && install **docker-machine**
 - [Instructions](https://docs.docker.com/machine/install-machine/)
 
-#### Happy path
+
+#### Happy path for production in `local machine` environment
 
 Just run:
 ```
 cd docker/production
+# without ssl
 bash docker.sh up
+# with ssl
+bash docker.sh up secure
+```
+
+#### Happy path for production `remote machine` environment
+
+Just run:
+```
+cd docker/production
+# without ssl
+bash docker.machine.sh up
+# with ssl
+bash docker.machine.sh up secure
 ```
 
 The docker configuration is explained in detail below.
 
 #### Script bash and env vars
 
-Go from console to the `docker / local` folder:
+Go from console to the `docker/production` folder:
 ```
-cd docker/local
+cd docker/production
 ```
 
-In `docker/local` there is a bash script in the` docker.sh` file that can be run like this:
+In `docker/production` there is a bash script in the` docker.sh` file that can be run like this:
 ```
 ./docker.sh parameters
 # Or
 bash docker.sh parameters  // If you have a different bash shell like oh my zsh
 ```
 
-There are two files with environment variables to consider:
-- `docker/local/.env` # Environment variables needed to run the bash script
-- `docker/local/ghost/.env` # Hugo service environment variables
+There are serveral files with environment variables or config files to consider:
+- `docker/production/.env` # Environment variables needed to run the bash script
+- `docker/production/ghost/.env` # Ghost service environment variables
+- `docker/production/mysql/.env` # Mysql service environment variables
+- `docker/production/nginx/.env` # Nginx service environment variables
+- `docker/production/nginx/site.template` # Nginx config site without ssl
+- `docker/production/nginx/site.template.ssl` # Nginx config site with ssl
 
-Files with environment variables `.env` are ignored and will be created automatically from the `.env.example` files.
+Files with environment variables `.env` and other config files mentioned below are ignored and will be created automatically from the `*.example` files.
 
 #### Commands
 
 **Notes:**
-- Parameters between {} are optionals.
-- Service names available: `hugo | node | bower | compass`
+- Params between {} are optional, except {}*.
+- Service names available: `Service names: ghost | mysql | nginx | cerbot`
 
 The following describes each of the parameters::
 
 **Usage: docker.sh [up|start|restart|stop|rm|sh|bash|logs|ps]**
-* `up {service}` --> Run services.
+* `deploy` --> Build and run services.
+* `server.up {secure}` --> Build and run server (nginx) services; "secure" parameter is optional for ssl configuration
+* `up {secure}` --> Build && deploy services; "secure" parameter is optional for ssl configuration.
 * `start {service}` --> Start services.
 * `restart {service}` --> Restart services.
 * `stop {service}` --> Stop services.
 * `rm {service}` --> Remove services.
-* `sh service` --> Connect to "service" shell.
-* `bash service` --> Connect to "service" bash shell
-* `logs {n_last_lines}` --> Show "service" server logs
-* `help` --> Show menu options
+* `sh {service}*` --> Connect to "service" shell.
+* `bash {service}*` --> Connect to "service" bash shell
+* `logs {service}* {n_last_lines}` --> Show "service" server logs
+* `machine.[details|create|start|restart|stop|rm|ip|ssh]` --> Machine actions

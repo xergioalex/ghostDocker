@@ -88,7 +88,7 @@ else
     utils.printer "Params between {} are optional, except {}*"
     utils.printer "Service names: ghost | mysql | nginx | cerbot"
     utils.printer ""
-    utils.printer "Usage: docker.sh [deploy|start|restart|stop|mongo|bash|logs n_last_lines|rm|ps|up|help|machine.[details|create|start|restart|stop|rm]]"
+    utils.printer "Usage: docker.sh [deploy|server.up|up|start|restart|stop|rm|sh|bash|logs|machine.[details|create|start|restart|stop|rm|ssh]]"
     echo -e "deploy                                                --> Build and run services"
     echo -e "server.up {secure}                                    --> Build and run server (nginx) services; \"secure\" parameter is optional for ssl configuration"
     echo -e "up {secure}                                           --> Build && deploy services; \"secure\" parameter is optional for ssl configuration"
