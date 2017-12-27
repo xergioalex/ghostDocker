@@ -3,8 +3,8 @@
 # Printer with shell colors
 function utils.printer {
 	# BASH COLORS
-	GREEN=`tput setaf 2`
-	RESET=`tput sgr0`
+    GREEN='\033[0;32m'
+    RESET='\033[0m'
 	if [[ ! -z "$2" ]]; then
 		# print new line before
     	echo ""
