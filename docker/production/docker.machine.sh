@@ -1,9 +1,7 @@
 #!/bin/bash
-SCRIPT=`realpath -s $0`
-SCRIPTPATH=`dirname $SCRIPT`
 
 # Utils functions
-. $SCRIPTPATH/../utils.sh
+. ../utils.sh
 
 # Create envs vars if don't exist
 ENV_FILES=(".env" "nginx/site.template" "nginx/site.template.ssl" "nginx/.env" "nginx/nginx.conf" "nginx/renewssl.sh" "nginx/crontab" "ghost/.env" "mysql/.env")

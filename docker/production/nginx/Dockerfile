@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:1.13.8-alpine
 
 MAINTAINER xergioalex@gmail.com
 
