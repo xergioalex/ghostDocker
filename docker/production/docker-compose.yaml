@@ -1,7 +1,7 @@
 version: '3'
 services:
   ghost:
-    image: ghost:1.19.0-alpine
+    image: ghost:2.11.1-alpine
     volumes:
       - ghost_data:/var/lib/ghost
     ports:
