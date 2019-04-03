@@ -14,7 +14,7 @@ server{
 
     ssl_certificate /etc/letsencrypt/live/blog.xergioalex.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/blog.xergioalex.com/privkey.pem;
-    server_name www.blog.xergioalex.com blog.xergioalex.com;
+    server_name blog.xergioalex.com;
 
     access_log /etc/nginx/logs/site.access;
     error_log /etc/nginx/logs/site.error error;
