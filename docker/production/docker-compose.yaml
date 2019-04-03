@@ -1,7 +1,7 @@
 version: '3'
 services:
   ghost:
-    image: ghost:2.11.1-alpine
+    image: ${SERVICE_GHOST_IMAGE}
     volumes:
       - ghost_data:/var/lib/ghost
     ports:
@@ -15,7 +15,7 @@ services:
     restart: on-failure
 
   mysql:
-    image: mysql:5.7
+    image: ${SERVICE_MYSQL_IMAGE}
     volumes:
       - mysql_data:/var/lib/mysql
     env_file:
