@@ -32,15 +32,3 @@ function utils.load_environment {
 		set +a
 	fi
 }
-
-
-# Set nginx service renewssl vars...
-function utils.nginx_renewssl_vars {
-	# Setup container service names
-	sed -i /NGINX_SERVICE_CONTAINER=/c\NGINX_SERVICE_CONTAINER=${COMPOSE_PROJECT_NAME}_nginx_1 nginx/renewssl.sh
-    sed -i /CERTBOT_SERVICE_CONTAINER=/c\CERTBOT_SERVICE_CONTAINER=${COMPOSE_PROJECT_NAME}_certbot_1 nginx/renewssl.sh
-
-    # Setup cron job vars
-    cp nginx/crontab.example nginx/crontab
-    sed -i -e "s/COMPOSE_PROJECT_NAME/$COMPOSE_PROJECT_NAME/g" nginx/crontab
-}

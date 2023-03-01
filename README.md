@@ -7,7 +7,7 @@
 [![Twitter XergioAleX](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/xergioalex)
 
 
-# Ghost docker configuration using nginx and certbot #
+# Ghost docker configuration using nginx #
 
 [![Docker infrastructure](docker-infrastructure.png)]()
 
@@ -23,9 +23,6 @@ Download && install **docker**
 Download && install **docker-compose**
 - [Instructions](https://docs.docker.com/compose/install/)
 
-Download && install **docker-machine**
-- [Instructions](https://docs.docker.com/machine/install-machine/)
-
 
 #### Happy path for production in `local machine` environment
 
@@ -36,17 +33,6 @@ cd docker/production
 bash docker.sh up
 # with ssl
 bash docker.sh up secure
-```
-
-#### Happy path for production `remote machine` environment
-
-Just run:
-```
-cd docker/production
-# without ssl
-bash docker.machine.sh up
-# with ssl
-bash docker.machine.sh up secure
 ```
 
 The docker configuration is explained in detail below.

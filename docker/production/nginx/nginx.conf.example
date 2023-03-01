@@ -21,12 +21,9 @@ http {
     access_log  /var/log/nginx/access.log  main;
 
     sendfile        on;
-    #tcp_nopush     on;
 
     keepalive_timeout  65;
     client_max_body_size 30m;
-
-    #gzip  on;
 
     include /etc/nginx/conf.d/*.conf;
 }

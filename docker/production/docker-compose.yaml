@@ -1,4 +1,11 @@
 version: '3'
+
+volumes:
+  ghost_data:
+  mysql_data:
+  certs_volume:
+  nginx_logs:
+
 services:
   ghost:
     image: ${SERVICE_GHOST_IMAGE}
@@ -6,7 +13,7 @@ services:
       - ghost_data:/var/lib/ghost
     ports:
       - 2368:2368
-    links:
+    depends_on:
       - mysql
     environment:
       - NODE_ENV=production
@@ -26,32 +33,14 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile
-    volumes:
-      - letsencrypt_certbot:/etc/letsencrypt
-      - nginx_logs:/etc/nginx/logs
-    links:
-      - ghost
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - certs_volume:/etc/certs
+      - nginx_logs:/etc/nginx/logs
     env_file:
       - nginx/.env
-    restart: on-failure
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - letsencrypt_certbot:/etc/letsencrypt
-      - letsencrypt_logs:/var/log/letsencrypt
-    ports:
-      - "80:80"
-      - "443:443"
-    command: certonly --standalone --non-interactive --agree-tos --email=${SERVICE_CERTBOT_EMAIL} ${SERVICE_CERTBOT_DOMAINS}
-
-volumes:
-  ghost_data:
-  mysql_data:
-  letsencrypt_certbot:
-  letsencrypt_logs:
-  nginx_config:
-  nginx_logs:
+    depends_on:
+      - ghost
+    restart: unless-stopped
