@@ -81,3 +81,27 @@ The following describes each of the parameters::
 * `bash {service}*` --> Connect to "service" bash shell
 * `logs {service}* {n_last_lines}` --> Show "service" server logs
 * `machine.[details|create|start|restart|stop|rm|ip|ssh]` --> Machine actions
+
+
+
+#### Using Multi Sites Config
+
+Followup similar steps for one site using the folder: 
+- Go to folder: `cd docker/production_multi_sites`
+- Setup `.env` vars
+- Deploy containers: `bash docker.sh up`
+- Setup mysql second database
+- Re deploy containers: `bash docker.sh up`
+
+
+**Create database for second site:**
+
+To create a new database with a new user in MySQL, you can follow these steps:
+1. Log in to MySQL as the root user: `mysql -u root -p`
+2. Enter your root password when prompted.
+3. Create a new database: `CREATE DATABASE dbname;`
+4. Create a new user: `CREATE USER 'username'@'%' IDENTIFIED BY 'password';`
+5. Grant privileges to the new user for the new database: `GRANT ALL PRIVILEGES ON dbname.* TO 'username'@'%';`
+6. Flush the privileges to apply the changes: `FLUSH PRIVILEGES;`
+Replace "dbname" with the name of your new database, "username" with the name of your new user, and "password" with a secure password for your new user.
+Once you have completed these steps, you should be able to log in to MySQL using your new user credentials and access your new database.

@@ -6,3 +6,12 @@ production/nginx/nginx.conf
 production/nginx/default.conf
 production/nginx/site.template
 production/nginx/site.template.ssl
+production_multi/.env
+production_multi/ghost_site_1/.env
+production_multi/ghost_site_2/.env
+production_multi/mysql/.env
+production_multi/nginx/.env
+production_multi/nginx/nginx.conf
+production_multi/nginx/default.conf
+production_multi/nginx/site.template
+production_multi/nginx/site.template.ssl

@@ -1,22 +1,29 @@
 version: '3'
 
 volumes:
-  ghost_data:
+  ghost_data_site_1:
+  ghost_data_site_2:
   mysql_data:
   certs_volume:
   nginx_logs:
 
 services:
-  ghost:
+  ghost_site_1: &ghost
     image: ${SERVICE_GHOST_IMAGE}
     volumes:
-      - ghost_data:/var/lib/ghost
-    ports:
-      - 2368:2368
+      - ghost_data_site_1:/var/lib/ghost
     depends_on:
       - mysql
     env_file:
-      - ghost/.env
+      - ghost_site_1/.env
+    restart: unless-stopped
+
+  ghost_site_2:
+    <<: *ghost
+    volumes:
+      - ghost_data_site_2:/var/lib/ghost
+    env_file:
+      - ghost_site_2/.env
     restart: unless-stopped
 
   mysql:
@@ -33,6 +40,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+      - "81:81"
       - "443:443"
     volumes:
       - certs_volume:/etc/certs
@@ -40,5 +48,6 @@ services:
     env_file:
       - nginx/.env
     depends_on:
-      - ghost
+      - ghost_site_1
+      - ghost_site_2
     restart: unless-stopped
