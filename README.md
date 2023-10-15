@@ -9,7 +9,7 @@
 
 # Ghost docker configuration using nginx #
 
-[![Docker infrastructure](docker-infrastructure.png)]()
+[![Docker infrastructure](media/ghost-docker-setup.png)]()
 
 ## Docker
 
