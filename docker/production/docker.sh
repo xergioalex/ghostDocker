@@ -14,22 +14,22 @@ utils.load_environment
 if [[ "$1" == "deploy" ]]; then
     # Build && start services
     utils.printer "Build && start services"
-    docker-compose up -d ghost
-    docker-compose restart ghost
+    docker compose up -d ghost
+    docker compose restart ghost
 elif [[ "$1" == "server.up" ]]; then
     if [[ "$2" == "secure" ]]; then
         utils.printer "Settting default.conf based on site.template.ssl..."
         cp nginx/site.template.ssl nginx/default.conf
         utils.printer "Stopping nginx container if it's running..."
-        docker-compose stop nginx
+        docker compose stop nginx
     else
         utils.printer "Settting default.conf based on site.template..."
         cp nginx/site.template nginx/default.conf
     fi
     utils.printer "Starting nginx container..."
-    docker-compose build nginx
-    docker-compose up -d nginx
-    docker-compose restart nginx
+    docker compose build nginx
+    docker compose up -d nginx
+    docker compose restart nginx
 elif [[ "$1" == "up" ]]; then
     # Build && start ghost service
     bash docker.sh deploy
@@ -37,28 +37,28 @@ elif [[ "$1" == "up" ]]; then
     bash docker.sh server.up $2
 elif [[ "$1" == "start" ]]; then
     utils.printer "Start services"
-    docker-compose start $2
+    docker compose start $2
 elif [[ "$1" == "restart" ]]; then
     utils.printer "Restart services"
-    docker-compose restart $2
+    docker compose restart $2
 elif [[ "$1" == "stop" ]]; then
     utils.printer "Stop services"
-    docker-compose stop $2
+    docker compose stop $2
 elif [[ "$1" == "rm" ]]; then
     utils.printer "Stop && remove all services"
-    docker-compose stop $2
-    docker-compose rm $2
+    docker compose stop $2
+    docker compose rm $2
 elif [[ "$1" == "bash" ]]; then
     if [[ ! -z "$2" ]]; then
         utils.printer "Connect to $2 bash shell"
-        docker-compose exec $2 bash
+        docker compose exec $2 bash
     else
         utils.printer "You should specify the service name: ghost | mysql | nginx | cerbot"
     fi
 elif [[ "$1" == "sh" ]]; then
     if [[ ! -z "$2" ]]; then
         utils.printer "Connect to $2 bash shell"
-        docker-compose exec $2 sh
+        docker compose exec $2 sh
     else
         utils.printer "You should specify the service name: ghost | mysql | nginx | cerbot"
     fi
@@ -66,16 +66,16 @@ elif [[ "$1" == "logs" ]]; then
     if [[ ! -z "$2" ]]; then
         utils.printer "Showing logs..."
         if [[ -z "$3" ]]; then
-            docker-compose logs -f $2
+            docker compose logs -f $2
         else
-            docker-compose logs -f --tail=$3 $2
+            docker compose logs -f --tail=$3 $2
         fi
     else
         utils.printer "You should specify the service name: ghost | mysql | nginx | cerbot"
     fi
 elif [[ "$1" == "ps" ]]; then
     utils.printer "Show all running containers"
-    docker-compose ps
+    docker compose ps
 else
     utils.printer "Params between {} are optional, except {}*"
     utils.printer "Service names: ghost | mysql | nginx | cerbot"
