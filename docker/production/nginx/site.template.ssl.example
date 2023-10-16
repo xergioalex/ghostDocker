@@ -13,7 +13,7 @@ server {
     add_header "X-XSS-Protection" "1; mode=block";
 
     location / {
-        proxy_pass http://ghost:3000;
+        proxy_pass http://ghost:2368;
         proxy_set_header Host $host;
         proxy_redirect off;
         proxy_http_version 1.1;
